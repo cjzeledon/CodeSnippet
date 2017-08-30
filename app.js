@@ -58,29 +58,16 @@ app.post('/add', function(req, res){
 app.post('/search', function(req, res){
   let searchTitle = req.body.search_title;
   let searchLanguage = req.body.search_language;
-  let searchTag = req.body.search_tag;
+  let searchTag = req.body.search_tags;
 
-  // if(searchLanguage !== ''){
-  //   SnipBox.find({
-  //     snippetLanguage: searchLanguage
-  //   })
-  //   .then(function(result){
-  //     console.log(result);
-  //     res.render('search', {
-  //       snipblah: result,
-  //     });
-  //   })
-  //     .catch(function(){
-  //       console.log("I didn't work dammit!");
-  //     });
-  // };
+  console.log(searchTag);
 
   if(searchLanguage !== ''){
+    console.log('Lang');
     SnipBox.find({
       snippetLanguage: searchLanguage,
     })
     .then(function(result){
-      console.log(result);
       res.render('search', {
         snipblah: result,
       });
@@ -89,6 +76,7 @@ app.post('/search', function(req, res){
         console.log("I didn't work dammit!");
       });
   } else if (searchTitle !== ''){
+    console.log('Title');
     SnipBox.find({
       snippetTitle: searchTitle,
     })
@@ -102,6 +90,7 @@ app.post('/search', function(req, res){
         console.log("I didn't work dammit!");
       });
   } else if (searchTag !== ''){
+    console.log('tag');
     SnipBox.find({
       snippetTags: searchTag,
     })
@@ -114,33 +103,18 @@ app.post('/search', function(req, res){
       .catch(function(){
         console.log("I didn't work dammit!");
       });
+  } else {
+    //If all the inputs are left empty and you hit the search button, it will show ALL snippet results. Did this on purpose if a user wants to view all snippets instead of searching for one language, tag or title of a snippet.
+    SnipBox.find()
+    .then(function(result){
+      console.log(result);
+      res.render('search',{
+        snipblah: result,
+      })
+    })
   };
 });
 
-// app.post('/formAdd', function(req, res){
-//   let addbookName = req.body.add_bookName;
-//   let addbookAuthor = req.body.add_bookAuthor;
-//   let addbookSeries = req.body.add_bookSeries;
-//   let addbookSeriesNum = req.body.add_bookSeriesNum;
-//   let addbookGenre = req.body.add_bookGenre;
-//   let addbookDescription = req.body.add_bookDescription;
-//   let addbookCover = req.body.add_bookCover;
-//
-//   BookInfo.create({
-//     bookName: addbookName,
-//     bookAuthor: addbookAuthor,
-//     bookDetails:{
-//       bookSeries: addbookSeries,
-//       bookSeriesNum: addbookSeriesNum, },
-//     bookGenre: addbookGenre,
-//     bookDescription: addbookDescription,
-//     bookCover: addbookCover
-//     })
-//     .then(function (err, book) {
-//       console.log(err);
-//       res.redirect('/');
-//   });
-// });
 //Checking username and password and grant access if correct information is provided
 // app.post('/', function(req, res){
 //   const login_username = req.body.login_userName;
