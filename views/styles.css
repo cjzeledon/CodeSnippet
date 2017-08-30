@@ -1,0 +1,76 @@
+@import url('https://fonts.googleapis.com/css?family=Iceland|Share+Tech+Mono');
+
+
+
+body{
+  background-color: white;
+}
+
+header{
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 4em;
+  color: #4A9586;
+  text-align: center;
+  margin: 15px;
+  /*border-bottom: 20px dotted #73C6B6;
+  border-radius: 60px;*/
+}
+
+section{
+  display: flex;
+  justify-content: space-around;
+  background-color: #C0E0DA;
+  border-radius: 5px;
+  padding: 10px;
+  border: 8px dashed white;
+  margin: 10px;
+}
+
+.theCode{
+  background-color: #E7F3F1;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  /*border: 8px dashed white;*/
+  padding: 10px;
+}
+
+h1{
+background-color: white;
+border-radius: 20px;
+padding: 10px;
+color: #4A9586;
+font-family: 'Share Tech Mono', monospace;
+text-transform: uppercase;
+}
+
+.codeLanguage, .codeTags{
+  font-size: .9em;
+  display: inline-block;
+  margin-right: 15px;
+}
+
+.codeNote{
+  margin-bottom: 20px;
+}
+
+.codeBox{
+  font-family: monospace;
+  background-color: #C0E0DA;
+  border-radius: 5px;
+  padding: 20px;
+  width: 60%;
+  float: right;
+  margin-left: 15px;
+}
+
+.logArea, .searchArea, .createArea{
+  width: 30%;
+}
+
+input[type=text], input[type=password], textarea{
+  border: 1px solid gray;
+  height: 30px;
+  width: 90%;
+  padding: 5px;
+  border-radius: 5px;
+}

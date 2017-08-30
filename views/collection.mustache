@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    World Snippet It All - Welcome
+  </title>
+<link rel="stylesheet" type="text/css" href="/styles.css">
+</head>
+<body>
+
+  <header>
+    World Snippet It All
+  </header>
+
+  <section>
+    <div class="logArea">
+      <h1>Log In</h1>
+      <form method="post" action="/">
+        <p><input type="text" name="login_username" placeholder="Username"></p>
+        <p><input type="password" name="login_password" placeholder="Password"></p>
+        <p><input type="submit" value="Log In"></p>
+      </form>
+    </div>
+
+    <div class="searchArea">
+      <h1>Search Snippet</h1>
+      <form method="post" action="/search">
+        <p><input type="text" name="search_title" placeholder="Title"></p>
+        <p><input type="text" name="search_language" placeholder="Language"></p>
+        <p><input type="text" name="search_tags" placeholder="Tags"></p>
+        <p><input type="Submit" value="Search"></p>
+      </form>
+    </div>
+
+    <div class="createArea">
+      <h1>Create A Snippet</h1>
+      <form method="post" action="/add">
+        <p><input type="text" name="add_title" placeholder="Title"></p>
+        <p><textarea row="5" col="20" name="add_body" placeholder="Add Code Snippet"></textarea><p>
+        <p><textarea row="5" col="20" name="add_note" placeholder="Optional note about the code"></textarea><p>
+        <p><input type="text" name="add_language" placeholder="Language"></p>
+        <p><input type="text" name="add_tag" placeholder="Tags"></p>
+        <p><input type="submit" value="Make Snippet"></p>
+      </form>
+    </div>
+  </section>
+
+  <div class="theCode">
+  {{ #box }}
+  <h1>{{ snippetTitle }}</h1>
+  <div class="codeBox">{{ snippetBody }}</div>
+  <div class="codeNote">{{ snippetNotes }}</div>
+  <div class="codeLanguage"><strong>Language:</strong> {{ snippetLanguage }}</div>
+  <div class="codeTags"><strong>Tags:</strong> {{ snippetTags }}</div>
+  {{ /box }}
+
+  </div>
+
+
+
+  <footer>
+  </footer>
+
+</body>
+</html>
