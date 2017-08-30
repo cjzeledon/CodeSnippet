@@ -15,17 +15,18 @@
   <section>
     <div class="logArea">
       <h1>Log In</h1>
-      <form method="post" action="/">
+      <form method="POST" action="/">
         <p><input type="text" name="login_username" placeholder="Username"></p>
         <p><input type="password" name="login_password" placeholder="Password"></p>
         <p><input type="submit" value="Log In"></p>
+        <p><a href="/signup">Don't Have An Account? Sign Up Here</a></p>
       </form>
     </div>
 
     <div class="searchArea">
       <h1>Search Snippet</h1>
-      <form method="post" action="/search">
-        <p><input type="text" name="search_title" id="snippetTitle" placeholder="Title"></p>
+      <form method="POST" action="/search">
+        <p><input type="text" name="search_title" placeholder="Title"></p>
         <p><input type="text" name="search_language" placeholder="Language"></p>
         <p><input type="text" name="search_tags" placeholder="Tags"></p>
         <p><input type="Submit" value="Search"></p>
@@ -34,7 +35,7 @@
 
     <div class="createArea">
       <h1>Create A Snippet</h1>
-      <form method="post" action="/add">
+      <form method="POST" action="/add">
         <p><input type="text" name="add_title" placeholder="Title"></p>
         <p><textarea row="5" col="20" name="add_body" placeholder="Add Code Snippet"></textarea><p>
         <p><textarea row="5" col="20" name="add_note" placeholder="Optional note about the code"></textarea><p>

@@ -16,7 +16,7 @@ app.set('views', './views');
 app.set('view engine', 'mustache');
 app.use(express.static("views"));
 app.use(session({
-  secret: 'keyboard cat',
+  secret: 'kljweisdnsduene93fmckwh93',
   resave: false,
   saveUninitialized: true,
   // cookie: { secure: true }
@@ -24,14 +24,45 @@ app.use(session({
 
 mongoose.connect('mongodb://localhost:27017/SnippetOrgan');
 
-//log in page
-// right now, it is render to collection.mustache as I am working on the log in
+const people = [
+  { peoName: 'Lourdes', peoPass: 'samsung' },
+  { peoName: 'Christina', peoPass: 'loves' },
+  { peoName: 'Alexandro', peoPass: 'bandsong' },
+];
+
+// sets the search.mustache as the main page
 app.get('/', function(req, res){
-  res.render('collection');
+  res.render('search');
 });
 
-app.get('/search', function(req, res){
-  res.render('search');
+//creates a sign up page for potential users to create account
+app.get('/signup', function(req, res){
+  res.render('signup');
+})
+
+// app.get('/search', function(req, res){
+//   if (request.session.who !== undefined){
+//     res.render('search', {
+//       whoName: req.session.who.
+//       whoPass: req.session.who.
+//     })
+//   }
+//   res.render('search');
+// });
+
+//Create new account
+app.post('/signup', function(req, res){
+  let signupName = req.body.signup_username;
+  let signupPass = req.body.signup_password;
+
+  PeepBox.create({
+    userName: signupName,
+    userPassword: signupPass,
+    })
+    .then(function(err, snap){
+    console.log(err);
+    res.redirect('/');
+    });
 });
 
 //Creating new snippet code to the database via form provided on the site
@@ -116,29 +147,43 @@ app.post('/search', function(req, res){
 });
 
 //Checking username and password and grant access if correct information is provided
-// app.post('/', function(req, res){
-//   const login_username = req.body.login_userName;
-//   const login_password = req.body.login_passWord;
-//   let person = null;
-//
-//   PeepBox.findOne({
-//     user: userName,
-//     pass: userPassword
-//   })
-//
-//   for (let i = 0; i < _______.length; i++){
-//     if (login_username === user && login_password === pass){
-//       // person = _______[i];
-//       request.session.who = person;
-//     }
-//   }
-//
-//   if (person !== null){
-//     respond.redirect('/collection');
-//   } else {
-//     respond.redirect('/index');
-//   };
-// });
+//use username = Sophia and password = running or username = Juliet and password = motocross to get access. These information are actually in the database.
+app.post('/', function(req, res){
+  const logname = req.body.login_username;
+  const logpass = req.body.login_password;
+  let person = null;
+
+  // PeepBox.find({
+  //   userName: logname,
+  //   userPassword: logpass
+  // }).then(function(access){
+  //   for (let i = 0; i < PeepBox.length; i++){
+  //     if (logname === PeepBox[i].userName && logpass === PeepBox[i].userPassword){
+  //       person = PeepBox[i];
+  //       req.session.who = person;
+  //     };
+  //   };
+  //
+  //   if (person !== null){
+  //     respond.redirect('/');
+  //   } else {
+  //     respond.redirect('/signup');
+  //   };
+  // })
+
+  for (let i = 0; i < people.length; i++){
+    if (logname === people[i].peoName && logpass === people[i].peoPass){
+      person = people[i];
+    }
+  }
+
+  if (person != null){
+    req.session.who = person;
+    res.redirect('/');
+    } else {
+    res.redirect('/signup');
+  };
+});
 
 //view all your collection of snippets on the page
 app.get('/collection', function(req, res){
